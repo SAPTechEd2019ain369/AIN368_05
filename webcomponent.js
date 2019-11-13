@@ -33,7 +33,44 @@
             this._shadowRoot = this.attachShadow({mode: 'open'});
             this._shadowRoot.appendChild(tmpl.content.cloneNode(true));
             this._svgContainer;
+            this.style.height="100%";
+            this._outerRad = 0.0;
+this._endAngleDeg = 0.0;
+this._endAngleDegMax = 145.0;
+this._startAngleDeg = -145.0;
+const bcRect = this.getBoundingClientRect();
+this._widgetHeight = bcRect.height;
+this._widgetWidth = bcRect.width;
+
+// Guide Lines
+this._ringColorCode ="black";
+this._guideOpacity = 0.75;
+this.ringThickness = 5;
+this._bracketThickness = 5;
+
+if (this._widgetHeight < this._widgetWidth){
+    this._widgetWidth = this._widgetHeight;
+   }
+
+   this.redraw();
+
+
+
+
+
         };
+
+        redraw() {
+            if (!this._svgContainer){
+                this._svgContainer = window._d3.select(this._shadowRoot)
+                .append("svg:svg")
+                .attr("id", "gauge")
+                .attr("width", this._widgetWidth)
+                .attr("height", this._widgetWidth);
+               }
+ 
+
+        }
     
     
     });
